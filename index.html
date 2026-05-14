@@ -674,12 +674,12 @@ section { padding: 100px 6%; }
   display: flex; align-items: center; gap: 12px;
   padding: 14px 0;
   border-bottom: 1px solid rgba(255,255,255,0.06);
-  font-size: 15px; color: rgba(255,255,255,0.7);
+  font-size: 15px; color: white;
 }
 .app-features li:last-child { border-bottom: none; }
 .app-features li::before {
   content: '✓'; width: 24px; height: 24px; border-radius: 50%;
-  background: rgba(233,69,96,0.15); color: var(--accent);
+  background: rgba(233,69,96,0.15); color: white;
   display: flex; align-items: center; justify-content: center;
   font-size: 12px; flex-shrink: 0;
 }
@@ -711,7 +711,7 @@ section { padding: 100px 6%; }
   font-size: 36px; font-weight: 800; margin-bottom: 16px;
 }
 .contact-info p {
-  font-size: 15px; color: rgba(255,255,255,0.5);
+  font-size: 15px; color: white; max-width: 400px;
   line-height: 1.8; margin-bottom: 36px;
 }
 
@@ -806,7 +806,7 @@ footer {
 }
 
 .footer-brand p {
-  font-size: 14px; color: rgba(255,255,255,0.4);
+  font-size: 14px; color: white;
   line-height: 1.8; max-width: 280px; margin-top: 16px;
 }
 
@@ -852,7 +852,7 @@ footer {
 .footer-col ul { list-style: none; }
 .footer-col ul li { margin-bottom: 12px; }
 .footer-col ul li a {
-  color: rgba(255,255,255,0.4); text-decoration: none;
+  color: white; text-decoration: none;
   font-size: 14px; transition: color 0.2s;
 }
 .footer-col ul li a:hover { color: var(--white); }
@@ -958,7 +958,7 @@ footer {
   color:white;
 }
 
-@media(max-width:768px){
+/*/@media(max-width:768px){
 
   .legal-modal{
     padding:28px 22px;
@@ -969,7 +969,7 @@ footer {
     font-size:26px;
   }
 
-}
+}*/
 /* ── MOBILE ── */
 @media (max-width: 768px) {
   .hero-visual { display: none; }
@@ -1005,7 +1005,7 @@ footer {
     <div class="hero-badge">
       <span></span> Now available in Nigeria
     </div>
-    <h1>Smart control<br>at your fingertipss</h1>
+    <h1>Smart control<br>at your fingertips</h1>
     <p class="hero-sub">
       Apex IoT turns your ordinary sockets, switches and lights into smart devices you can control from anywhere in the world — or right from your phone at home.
     </p>
@@ -1349,7 +1349,7 @@ footer {
     <div>
       <div class="section-tag">Mobile app</div>
       <h2 class="section-title">Your devices,<br>in your pocket</h2>
-      <p style="color:rgba(255,255,255,0.5);line-height:1.8;margin-bottom:24px;font-size:15px">
+      <p style="color:white;line-height:1.8;margin-bottom:24px;font-size:15px">
         The Apex IoT app is your command centre. Add devices, control them, monitor sensors, receive motion alerts and update firmware — all from one place.
       </p>
       <ul class="app-features">
