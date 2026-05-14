@@ -866,6 +866,110 @@ footer {
 
 .footer-bottom p { font-size: 13px; color: rgba(255,255,255,0.3); }
 
+/* LEGAL MODAL */
+.legal-modal-overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.7);
+  backdrop-filter:blur(6px);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  opacity:0;
+  pointer-events:none;
+  transition:0.3s ease;
+  z-index:9999;
+  padding:20px;
+}
+
+.legal-modal-overlay.active{
+  opacity:1;
+  pointer-events:auto;
+}
+
+.legal-modal{
+  width:100%;
+  max-width:760px;
+  max-height:90vh;
+  overflow-y:auto;
+  background:#0f172a;
+  color:white;
+  border-radius:28px;
+  padding:38px;
+  position:relative;
+  box-shadow:0 20px 60px rgba(0,0,0,.45);
+  animation:modalPop .25s ease;
+}
+
+@keyframes modalPop{
+  from{
+    transform:scale(.92);
+    opacity:0;
+  }
+  to{
+    transform:scale(1);
+    opacity:1;
+  }
+}
+
+.legal-close{
+  position:absolute;
+  top:18px;
+  right:18px;
+  width:42px;
+  height:42px;
+  border:none;
+  border-radius:50%;
+  background:rgba(255,255,255,0.08);
+  color:white;
+  font-size:28px;
+  cursor:pointer;
+  transition:0.25s ease;
+}
+
+.legal-close:hover{
+  background:rgba(255,255,255,0.15);
+  transform:rotate(90deg);
+}
+
+.legal-content h2{
+  font-size:32px;
+  margin-bottom:10px;
+}
+
+.legal-content h3{
+  margin-top:28px;
+  margin-bottom:10px;
+  font-size:20px;
+}
+
+.legal-content p,
+.legal-content li{
+  color:rgba(255,255,255,0.75);
+  line-height:1.8;
+  font-size:15px;
+}
+
+.legal-content ul{
+  padding-left:20px;
+}
+
+.legal-content strong{
+  color:white;
+}
+
+@media(max-width:768px){
+
+  .legal-modal{
+    padding:28px 22px;
+    border-radius:22px;
+  }
+
+  .legal-content h2{
+    font-size:26px;
+  }
+
+}
 /* ── MOBILE ── */
 @media (max-width: 768px) {
   .hero-visual { display: none; }
@@ -1423,14 +1527,28 @@ footer {
         <li><a href="#contact">Contact</a></li>
       </ul>
     </div>
-    <div class="footer-col">
-      <h4>Legal</h4>
-      <ul>
-        <li><a href="#">Privacy Policy</a></li>
-        <li><a href="#">Terms of Use</a></li>
-        <li><a href="#">Warranty</a></li>
-      </ul>
+    <!-- LEGAL -->
+<div class="footer-col">
+  <h4>Legal</h4>
+  <ul>
+    <li><a href="#" onclick="openLegalModal('privacy')">Privacy Policy</a></li>
+    <li><a href="#" onclick="openLegalModal('terms')">Terms of Use</a></li>
+    <li><a href="#" onclick="openLegalModal('warranty')">Warranty</a></li>
+  </ul>
+</div>
+
+<!-- LEGAL MODAL -->
+<div class="legal-modal-overlay" id="legalModal">
+  <div class="legal-modal" onclick="event.stopPropagation()">
+
+    <button class="legal-close" onclick="closeLegalModal()">×</button>
+
+    <div class="legal-content" id="legalContent">
+      <!-- Dynamic Content -->
     </div>
+
+  </div>
+</div>
   </div>
 
   <div class="footer-bottom">
@@ -1445,6 +1563,136 @@ const form = document.getElementById('contactForm');
 const btn  = document.getElementById('submitBtn');
 const txt  = document.getElementById('submitText');
 const msg  = document.getElementById('formMsg');
+const legalData = {
+
+  privacy: `
+    <h2>Privacy Policy</h2>
+    <p><strong>Last Updated:</strong> January 2026</p>
+
+    <p>
+      Apex IoT values your privacy. This Privacy Policy explains how we collect,
+      use, and protect information when you use our products, website, and mobile applications.
+    </p>
+
+    <h3>Information We Collect</h3>
+    <ul>
+      <li>Basic account information such as name, email address, and phone number.</li>
+      <li>Device information including IP address, WiFi status, and connected smart devices.</li>
+      <li>Usage data to improve reliability, performance, and security.</li>
+    </ul>
+
+    <h3>How We Use Your Information</h3>
+    <ul>
+      <li>To operate and improve Apex smart home products.</li>
+      <li>To provide customer support and troubleshooting.</li>
+      <li>To send important security and service updates.</li>
+    </ul>
+
+    <h3>Data Protection</h3>
+    <p>
+      We implement industry-standard security practices to protect your data
+      against unauthorized access, misuse, or disclosure.
+    </p>
+
+    <h3>Third-Party Services</h3>
+    <p>
+      Some services may rely on trusted third-party providers such as cloud hosting,
+      analytics, or push notification platforms.
+    </p>
+
+    <h3>Your Rights</h3>
+    <p>
+      You may request access, correction, or deletion of your personal data by contacting us.
+    </p>
+
+    <h3>Contact</h3>
+    <p>
+      For privacy-related concerns, contact Apex IoT support.
+    </p>
+  `,
+
+  terms: `
+    <h2>Terms of Use</h2>
+    <p><strong>Last Updated:</strong> January 2026</p>
+
+    <p>
+      By using Apex IoT products, software, or services, you agree to these Terms of Use.
+    </p>
+
+    <h3>Acceptable Use</h3>
+    <ul>
+      <li>Users must operate products responsibly and within applicable laws.</li>
+      <li>Unauthorized modification or misuse of Apex systems is prohibited.</li>
+      <li>Users are responsible for maintaining secure passwords and account access.</li>
+    </ul>
+
+    <h3>Service Availability</h3>
+    <p>
+      While Apex aims for reliable uptime, uninterrupted service cannot always be guaranteed.
+    </p>
+
+    <h3>Limitation of Liability</h3>
+    <p>
+      Apex IoT is not liable for indirect damages, data loss,
+      power interruptions, or misuse of products.
+    </p>
+
+    <h3>Intellectual Property</h3>
+    <p>
+      All branding, software, designs, and content remain the property of Apex IoT.
+    </p>
+
+    <h3>Changes to Terms</h3>
+    <p>
+      Apex reserves the right to update these terms at any time without prior notice.
+    </p>
+  `,
+
+  warranty: `
+    <h2>Warranty Policy</h2>
+    <p><strong>Last Updated:</strong> January 2026</p>
+
+    <p>
+      Apex IoT products are covered by a limited warranty against manufacturing defects.
+    </p>
+
+    <h3>Warranty Coverage</h3>
+    <ul>
+      <li>Coverage applies to hardware faults under normal use conditions.</li>
+      <li>Warranty duration is 6 months from the date of purchase unless stated otherwise.</li>
+    </ul>
+
+    <h3>Warranty Does Not Cover</h3>
+    <ul>
+      <li>Physical damage caused by misuse, drops, or liquid exposure.</li>
+      <li>Damage caused by electrical surges or improper installation.</li>
+      <li>Unauthorized repairs or modifications.</li>
+    </ul>
+
+    <h3>Replacement & Repairs</h3>
+    <p>
+      Eligible products may be repaired, replaced, or serviced at Apex’s discretion.
+    </p>
+
+    <h3>Support</h3>
+    <p>
+      Customers experiencing issues should contact Apex support with proof of purchase.
+    </p>
+  `
+};
+
+function openLegalModal(type){
+  document.getElementById('legalModal').classList.add('active');
+  document.getElementById('legalContent').innerHTML = legalData[type];
+  document.body.style.overflow = 'hidden';
+}
+
+function closeLegalModal(){
+  document.getElementById('legalModal').classList.remove('active');
+  document.body.style.overflow = 'auto';
+}
+
+document.getElementById('legalModal').addEventListener('click', closeLegalModal);
 
 form.addEventListener('submit', async function(e) {
   e.preventDefault();
